@@ -1,0 +1,19 @@
+.user-word-container{    
+    display: flex;
+    background-color: gray;
+    align-items: center;
+    /* width: 100%; */
+    justify-items: center;
+    flex-direction: row;
+    margin: 0 auto;
+    /* position: relative; */
+}
+.active{
+    background-color: blue;
+}
+.box {
+    width: 20px;
+    height: 20px;
+    background-color: pink;    
+    margin: 2px;
+}
