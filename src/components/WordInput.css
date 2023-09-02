@@ -1,8 +1,7 @@
 .user-word-container{    
-    display: flex;
-    background-color: gray;
-    align-items: center;
-    /* width: 100%; */
+    display: flex;    
+    background-color: aquamarine;
+    align-items: center;    
     justify-items: center;
     flex-direction: row;
     margin: 0 auto;
@@ -11,9 +10,13 @@
 .active{
     background-color: blue;
 }
-.box {
+.box {    
     width: 20px;
     height: 20px;
     background-color: pink;    
     margin: 2px;
+    text-align: center;    
+    font-weight: bold;
+    font-size: x-large;
+    flex: 1;
 }

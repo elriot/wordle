@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import './App.css';
-import { keyboard } from '@testing-library/user-event/dist/keyboard';
+import KeyboardButton from './components/KeyboardButton'
 import { WordInput } from './components/WordInput';
 
 
@@ -9,7 +9,7 @@ const CORRECT = 1;
 const POSITION_WRONG = 2;
 
 const checkAnswer = (answer, userInput) => {
-    const result = [];
+    const result = Array.from({ length: answer.length }, () => -1);
     const ansCharMap = {};
     for (const char of answer) {
         if (ansCharMap[char] === undefined) {
@@ -18,36 +18,71 @@ const checkAnswer = (answer, userInput) => {
             ansCharMap[char] = ansCharMap[char] + 1;
         }
     }
-
-    for (let i = 0; i < userInput.length; i++) {
-        const currAnsChar = answer[i];
-        const currUserChar = userInput[i];
-        console.log(i, currAnsChar, currUserChar);
-        if (currAnsChar === currUserChar) {
-            result.push(CORRECT);
-        } else {
-            if (ansCharMap[currUserChar] > 0) {
-                result.push(POSITION_WRONG);
-                ansCharMap[currUserChar]--;
-            } else {
-                result.push(WRONG);
-            }
+    console.log("before", ansCharMap);
+    // // 첫번째. 먼저 완전히 일치하는 요소들을 골라낸다
+    for(let i = 0; i < answer.length; i++){
+        if(answer[i] === userInput[i]){
+            result[i] = CORRECT;
+            ansCharMap[answer[i]]--;
         }
     }
+    console.log("After", ansCharMap);
+    // // 두번째. POSITION_WRONG과 WRONG을 골라낸다
+    for (let i = 0; i < userInput.length; i++) {
+        if(result[i] !== -1) continue;
+        // console.log(i, answer[i], userInput[i]);
+        const currAnsChar = userInput[i];
+        if (ansCharMap[currAnsChar] > 0) {
+            result[i] = POSITION_WRONG;
+            ansCharMap[currAnsChar]--;
+        } else {
+            result[i] = WRONG;
+        }        
+    }
+
     return result;
 }
+
+const isAlphabet = (value) => {
+    return /^[a-zA-Z]+$/.test(value);
+}
 function App() {
-    const answer = "fubao";
+    const answer = "fubao".toUpperCase();
+    const charLength = 5;
     const [wordInputs, setWordInputs] = useState([WordInput]);
     const [userInputs, setUserInputs] = useState([]);
     const [results, setResults]= useState([]);
-    const lastInputRef = useRef(null);
+    const [currentInput, setCurrentInput] = useState("");
+    
 
     const handleKeyPress = (event) => {
+        // console.log(event.keyCode)
         if (event.key === "Enter") {
-            const result = checkAnswer(answer, "fubao");
-            setResults(results=>results.concat(result));
-            return;
+            if(currentInput.length !== answer.length)
+                return;
+
+            setUserInputs(userInputs=>userInputs.concat(currentInput));
+            setCurrentInput("");
+            setResults((prev)=>[...prev, checkAnswer(answer, currentInput)]);
+            setWordInputs(prev=>prev.concat(WordInput));
+            // const result = checkAnswer(answer, userInputs[0]);
+            // console.log(result);            
+            // return;
+        } else if(event.key === "Backspace"){
+            if(currentInput.length > 0){
+                setCurrentInput(currentInput.slice(0,-1));
+            }
+        } else {
+            if(event.key.length !== 1){
+                console.log("특수키 입력한 것으로 함")
+                return;
+            }
+            if(currentInput.length >= answer.length)
+                return;
+            if(!isAlphabet(event.key)) 
+                return;
+            const input = currentInput + (event.key).toUpperCase();
+            setCurrentInput(input);
         }
     }
     const handleAddClick = () =>{
@@ -61,21 +96,31 @@ function App() {
         return () => {
             window.removeEventListener("keydown", handleKeyPress);
         };
-    }, [wordInputs]);
+    }, [currentInput]);
+    const focusRef = useRef();
+    const handleContainerClick = () => {
+        focusRef.current.focus();
+    }
+    const [showInput, setShowInput] = useState(false);
     return (
-        <div className='container row'>            
+        <div className='app-container container' onClick={handleContainerClick} ref={focusRef}>
+            <div value={currentInput}>{currentInput}</div>
             {wordInputs.map((input, index) => (                
                 <WordInput
-                    answer={answer}
-                    userInput={userInputs[index]}
-                    result={results[index]}
+                    userInput={index === wordInputs.length-1 ? currentInput : userInputs[index]}
+                    res={results[index]}
                     key={index}
-                    ref={index === wordInputs.length - 1 ? lastInputRef : null}
                     active={index === wordInputs.length-1}
+                    answer={answer}
                 />
             ))}
             <button onClick={handleAddClick}>add</button>
-        </div>
+
+
+            <button onClick={handleAddClick}>show textinput</button>
+            {/* <KeyboardButton/> */}
+            { showInput && <input type='text' style={{visibility:'visible'}} />}
+        </div>               
     );
 }
 

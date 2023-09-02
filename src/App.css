@@ -6,3 +6,11 @@
   align-items: center;
   margin: 0 auto;
 }
+.app-container{
+  margin: 20px auto;
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-items: center;  
+  width: 100%;
+}
