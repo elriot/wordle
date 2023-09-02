@@ -18,7 +18,6 @@ const checkAnswer = (answer, userInput) => {
             ansCharMap[char] = ansCharMap[char] + 1;
         }
     }
-    console.log("before", ansCharMap);
     // // 첫번째. 먼저 완전히 일치하는 요소들을 골라낸다
     for(let i = 0; i < answer.length; i++){
         if(answer[i] === userInput[i]){
@@ -26,7 +25,7 @@ const checkAnswer = (answer, userInput) => {
             ansCharMap[answer[i]]--;
         }
     }
-    console.log("After", ansCharMap);
+
     // // 두번째. POSITION_WRONG과 WRONG을 골라낸다
     for (let i = 0; i < userInput.length; i++) {
         if(result[i] !== -1) continue;
@@ -65,6 +64,7 @@ function App() {
             setCurrentInput("");
             setResults((prev)=>[...prev, checkAnswer(answer, currentInput)]);
             setWordInputs(prev=>prev.concat(WordInput));
+
             // const result = checkAnswer(answer, userInputs[0]);
             // console.log(result);            
             // return;
@@ -92,7 +92,7 @@ function App() {
     }
     useEffect(() => {
         window.addEventListener("keydown", handleKeyPress);
-
+        focusRef.current.focus();
         return () => {
             window.removeEventListener("keydown", handleKeyPress);
         };
@@ -100,11 +100,11 @@ function App() {
     const focusRef = useRef();
     const handleContainerClick = () => {
         focusRef.current.focus();
+
     }
-    const [showInput, setShowInput] = useState(false);
     return (
-        <div className='app-container container' onClick={handleContainerClick} ref={focusRef}>
-            <div value={currentInput}>{currentInput}</div>
+        <div className='app-container container' onClick={handleContainerClick}>
+            {/* <div value={currentInput}>{currentInput}</div> */}
             {wordInputs.map((input, index) => (                
                 <WordInput
                     userInput={index === wordInputs.length-1 ? currentInput : userInputs[index]}
@@ -114,12 +114,12 @@ function App() {
                     answer={answer}
                 />
             ))}
-            <button onClick={handleAddClick}>add</button>
-
-
-            <button onClick={handleAddClick}>show textinput</button>
             {/* <KeyboardButton/> */}
-            { showInput && <input type='text' style={{visibility:'visible'}} />}
+            <div>
+                <input type='text' style={{visibility:'visible'}} ref={focusRef} value={currentInput}/>
+                <button onClick={handleAddClick}>Enter</button>
+            </div>
+
         </div>               
     );
 }

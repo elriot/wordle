@@ -24,7 +24,7 @@ export default function Keyboard() {
                 <button onClick={() => handleKeyPress('O')}>O</button>
                 <button onClick={() => handleKeyPress('P')}>P</button>            
             </div>
-            <div className="keyboard-row row">
+            <div className="keyboard-row">
                 <button onClick={() => handleKeyPress('A')}>A</button>
                 <button onClick={() => handleKeyPress('S')}>S</button>
                 <button onClick={() => handleKeyPress('D')}>D</button>
@@ -35,7 +35,7 @@ export default function Keyboard() {
                 <button onClick={() => handleKeyPress('K')}>K</button>
                 <button onClick={() => handleKeyPress('L')}>L</button>
             </div>
-            <div className="keyboard-row row">
+            <div className="keyboard-row">
                 <button onClick={() => handleKeyPress('Z')}>Z</button>
                 <button onClick={() => handleKeyPress('X')}>X</button>
                 <button onClick={() => handleKeyPress('C')}>C</button>
