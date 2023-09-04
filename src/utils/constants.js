@@ -1,0 +1,6 @@
+const WRONG = 0;
+const CORRECT = 1;
+const POSITION_WRONG = 2;
+
+
+export {WRONG, CORRECT, POSITION_WRONG};

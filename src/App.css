@@ -4,13 +4,24 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 0 auto;
+  /* margin: ; */
+  margin:0px;
 }
 .app-container{
-  margin: 20px auto;
   display: flex;
   flex-direction: column;
   justify-items: center;
   align-items: center;  
   width: 100%;
+}
+
+.header-container{
+  width: 100%;
+  text-align: center;
+}
+.word-container{
+  margin-top: 30px;
+}
+.input-container{
+  margin: 20px auto;
 }

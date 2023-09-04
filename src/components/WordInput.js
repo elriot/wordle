@@ -15,14 +15,8 @@ const getBgColor = (code) => {
 
 }
 export function WordInput({ active, answer, userInput, res, ...props }) {
-    // res: [0, 0, 2, 0, 1] 
-
     const size = 50;
-
-    console.log("size", size);
     const bgColor = active === true ? "blue" : "grey";
-    
-    // const styles = { width: `${size}px`, height: `${size}px`, backgroundColor: "white" };    
     const styles = { width: `${size}px`, height: `${size}px`, backgroundColor: "white" };    
     const classes = "box"
 
@@ -38,7 +32,7 @@ export function WordInput({ active, answer, userInput, res, ...props }) {
                     key={index}
                     className={classes}
                 >
-                    {userInput[index]}
+                    <span>{userInput[index]}</span>
                 </div>
             ))}
         </div>

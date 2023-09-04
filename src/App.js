@@ -2,11 +2,10 @@ import { useEffect, useRef, useState } from 'react';
 import './App.css';
 import KeyboardButton from './components/KeyboardButton'
 import { WordInput } from './components/WordInput';
+import {WRONG, CORRECT, POSITION_WRONG} from './utils/constants.js'
+import Header from './components/Header.js';
 
 
-const WRONG = 0;
-const CORRECT = 1;
-const POSITION_WRONG = 2;
 
 const checkAnswer = (answer, userInput) => {
     const result = Array.from({ length: answer.length }, () => -1);
@@ -53,21 +52,23 @@ function App() {
     const [results, setResults]= useState([]);
     const [currentInput, setCurrentInput] = useState("");
     
-
+    const submitAnswer = () => {
+        if(currentInput.length !== answer.length)
+            return;
+        
+        
+        setUserInputs(userInputs=>userInputs.concat(currentInput));
+        setResults((prev)=>[...prev, checkAnswer(answer, currentInput)]);
+        if(currentInput === answer){
+            console.log("즈엉답입니다");
+            return;
+        }
+        setCurrentInput("");
+        setWordInputs(prev=>prev.concat(WordInput));
+    }
     const handleKeyPress = (event) => {
-        // console.log(event.keyCode)
         if (event.key === "Enter") {
-            if(currentInput.length !== answer.length)
-                return;
-
-            setUserInputs(userInputs=>userInputs.concat(currentInput));
-            setCurrentInput("");
-            setResults((prev)=>[...prev, checkAnswer(answer, currentInput)]);
-            setWordInputs(prev=>prev.concat(WordInput));
-
-            // const result = checkAnswer(answer, userInputs[0]);
-            // console.log(result);            
-            // return;
+            submitAnswer();
         } else if(event.key === "Backspace"){
             if(currentInput.length > 0){
                 setCurrentInput(currentInput.slice(0,-1));
@@ -85,10 +86,8 @@ function App() {
             setCurrentInput(input);
         }
     }
-    const handleAddClick = () =>{
-        if(wordInputs.length > 4) return;
-        setWordInputs(wordInputs=>wordInputs.concat(WordInput));   
-        setUserInputs(userInputs=>userInputs.concat(""));           
+    const handleEnterClick = () =>{
+        submitAnswer();     
     }
     useEffect(() => {
         window.addEventListener("keydown", handleKeyPress);
@@ -102,22 +101,35 @@ function App() {
         focusRef.current.focus();
 
     }
+    const handleInputChange = () => {
+        return; // prevent error , there's keyboardEvent for input action    
+    }
+    const handleRefresh = () => {
+        setWordInputs([WordInput]);
+        setUserInputs([]);
+        setResults([]);
+        setCurrentInput("")
+        // console.log("Refresh")
+    }
     return (
-        <div className='app-container container' onClick={handleContainerClick}>
-            {/* <div value={currentInput}>{currentInput}</div> */}
-            {wordInputs.map((input, index) => (                
-                <WordInput
-                    userInput={index === wordInputs.length-1 ? currentInput : userInputs[index]}
-                    res={results[index]}
-                    key={index}
-                    active={index === wordInputs.length-1}
-                    answer={answer}
-                />
-            ))}
-            {/* <KeyboardButton/> */}
-            <div>
-                <input type='text' style={{visibility:'visible'}} ref={focusRef} value={currentInput}/>
-                <button onClick={handleAddClick}>Enter</button>
+        <div className='app-container' onClick={handleContainerClick}>
+            <div className='header-container'>
+                <Header onRefreshClick={handleRefresh}/>
+            </div>
+            <div className='word-container'>
+                {wordInputs.map((input, index) => (                
+                    <WordInput
+                        userInput={index === wordInputs.length-1 ? currentInput : userInputs[index]}
+                        res={results[index]}
+                        key={index}
+                        active={index === wordInputs.length-1}
+                        answer={answer}
+                    />
+                ))}
+            </div>
+            <div className='input-container'>
+                <input type='text' style={{visibility:'visible'}} ref={focusRef} value={currentInput} onChange={handleInputChange}/>
+                <button onClick={handleEnterClick}>Enter</button>
             </div>
 
         </div>               
