@@ -1,5 +1,5 @@
 .header {
-  background-color: bisque;
+  background-color: rgb(188, 226, 249);
   padding: 10px;
   position: relative;
   width: 100%;
@@ -8,9 +8,17 @@
 
 .title {
   font-size: x-large;
-  text-align: center;
+  text-align: left;
+  font-weight: bolder;
+  float: left;
+  padding-left:10px;
 }
 
 .header-button {
   background-color: white;
+  /* padding: 20px; */
+  cursor: pointer;
+  /* font-weight: bolder; */
+  /* font-size: large; */
+  padding: 0px;
 }

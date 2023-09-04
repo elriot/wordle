@@ -70,7 +70,8 @@ function App() {
     const handleKeyPress = (event) => {
         if (event.key === "Enter") {
             submitAnswer();
-            window.scrollBy(0, WORD_INPUT_SIZE);
+            console.log(window)
+            // window.scrollBy(0, WORD_INPUT_SIZE);
         } else if(event.key === "Backspace"){
             if(currentInput.length > 0){
                 setCurrentInput(currentInput.slice(0,-1));
@@ -92,18 +93,10 @@ function App() {
         submitAnswer();     
     }
     useEffect(() => {
-        // const updatePosition = () => {
-        //     if (focusRef.current) {
-        //         focusRef.current.style.position = "absolute";
-        //         focusRef.current.style.top = `${window.innerHeight - focusRef.current.offsetHeight}px`;
-        //     }
-        // };
         window.addEventListener("keydown", handleKeyPress);
-        // window.addEventListener("resize", updatePosition);
         focusRef.current.focus();
         return () => {
             window.removeEventListener("keydown", handleKeyPress);
-            // window.addEventListener("resize", updatePosition);
         };
     }, [currentInput]);
     
@@ -121,8 +114,10 @@ function App() {
             setUserInputs([]);
             setResults([]);
             setCurrentInput("")
-        } else { // func === "share"
-            // console.log("shareToFriend")
+        } else if(func === "share") { // func === "share"
+            console.log("share ToFriend")
+        } else if(func === "info"){
+            console.log("info");
         }
     }
     return (
