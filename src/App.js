@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import './App.css';
 import KeyboardButton from './components/KeyboardButton'
 import { WordInput } from './components/WordInput';
-import {WRONG, CORRECT, POSITION_WRONG} from './utils/constants.js'
+import {WRONG, CORRECT, POSITION_WRONG, WORD_INPUT_SIZE} from './utils/constants.js'
 import Header from './components/Header.js';
 
 
@@ -51,6 +51,7 @@ function App() {
     const [userInputs, setUserInputs] = useState([]);
     const [results, setResults]= useState([]);
     const [currentInput, setCurrentInput] = useState("");
+    const focusRef = useRef();
     
     const submitAnswer = () => {
         if(currentInput.length !== answer.length)
@@ -69,6 +70,7 @@ function App() {
     const handleKeyPress = (event) => {
         if (event.key === "Enter") {
             submitAnswer();
+            window.scrollBy(0, WORD_INPUT_SIZE);
         } else if(event.key === "Backspace"){
             if(currentInput.length > 0){
                 setCurrentInput(currentInput.slice(0,-1));
@@ -90,13 +92,21 @@ function App() {
         submitAnswer();     
     }
     useEffect(() => {
+        // const updatePosition = () => {
+        //     if (focusRef.current) {
+        //         focusRef.current.style.position = "absolute";
+        //         focusRef.current.style.top = `${window.innerHeight - focusRef.current.offsetHeight}px`;
+        //     }
+        // };
         window.addEventListener("keydown", handleKeyPress);
+        // window.addEventListener("resize", updatePosition);
         focusRef.current.focus();
         return () => {
             window.removeEventListener("keydown", handleKeyPress);
+            // window.addEventListener("resize", updatePosition);
         };
     }, [currentInput]);
-    const focusRef = useRef();
+    
     const handleContainerClick = () => {
         focusRef.current.focus();
 
@@ -104,17 +114,21 @@ function App() {
     const handleInputChange = () => {
         return; // prevent error , there's keyboardEvent for input action    
     }
-    const handleRefresh = () => {
-        setWordInputs([WordInput]);
-        setUserInputs([]);
-        setResults([]);
-        setCurrentInput("")
-        // console.log("Refresh")
+    const handleHeaderClick = (func) => {
+        // console.log("func" , func);
+        if(func === "reset"){
+            setWordInputs([WordInput]);
+            setUserInputs([]);
+            setResults([]);
+            setCurrentInput("")
+        } else { // func === "share"
+            // console.log("shareToFriend")
+        }
     }
     return (
         <div className='app-container' onClick={handleContainerClick}>
             <div className='header-container'>
-                <Header onRefreshClick={handleRefresh}/>
+                <Header onHeaderButtonClick={handleHeaderClick}/>
             </div>
             <div className='word-container'>
                 {wordInputs.map((input, index) => (                
@@ -128,7 +142,7 @@ function App() {
                 ))}
             </div>
             <div className='input-container'>
-                <input type='text' style={{visibility:'visible'}} ref={focusRef} value={currentInput} onChange={handleInputChange}/>
+                <input type='text'  ref={focusRef} value={currentInput} onChange={handleInputChange}/>
                 <button onClick={handleEnterClick}>Enter</button>
             </div>
 

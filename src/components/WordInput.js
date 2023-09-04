@@ -1,21 +1,18 @@
-import React, { useRef } from 'react';
 import "./WordInput.css";
-const WRONG = 0;
-const CORRECT = 1;
-const POSITION_WRONG = 2;
+import {WRONG, CORRECT, POSITION_WRONG, WORD_INPUT_SIZE} from "../utils/constants.js" 
 
 const getBgColor = (code) => {
     if (code === CORRECT) {
         return "green";
     } else if (code === POSITION_WRONG) {
         return "yellow";
-    } else {
+    } else {//if (code===WRONG){
         return "grey";
     }
 
 }
 export function WordInput({ active, answer, userInput, res, ...props }) {
-    const size = 50;
+    const size = WORD_INPUT_SIZE;
     const bgColor = active === true ? "blue" : "grey";
     const styles = { width: `${size}px`, height: `${size}px`, backgroundColor: "white" };    
     const classes = "box"
