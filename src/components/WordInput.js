@@ -15,7 +15,7 @@ export function WordInput({ active, answer, userInput, res, ...props }) {
     const size = WORD_INPUT_SIZE;
     const bgColor = active === true ? "blue" : "grey";
     const styles = { width: `${size}px`, height: `${size}px`, backgroundColor: "white" };    
-    const classes = "box"
+    const classes = active ? "box active" : "box";
 
     return (
         <div className={`user-word-container ${active === true ? "active" : ""}`}>

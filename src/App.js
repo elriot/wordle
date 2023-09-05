@@ -1,11 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
 import './App.css';
-import KeyboardButton from './components/KeyboardButton'
 import { WordInput } from './components/WordInput';
 import {WRONG, CORRECT, POSITION_WRONG, WORD_INPUT_SIZE} from './utils/constants.js'
 import Header from './components/Header.js';
-
-
+import Modal from './components/Modal';
 
 const checkAnswer = (answer, userInput) => {
     const result = Array.from({ length: answer.length }, () => -1);
@@ -51,6 +49,7 @@ function App() {
     const [userInputs, setUserInputs] = useState([]);
     const [results, setResults]= useState([]);
     const [currentInput, setCurrentInput] = useState("");
+    const [modalVisible, setModalVisible] = useState(false);
     const focusRef = useRef();
     
     const submitAnswer = () => {
@@ -118,13 +117,18 @@ function App() {
             console.log("share ToFriend")
         } else if(func === "info"){
             console.log("info");
+            setModalVisible(true);
         }
+    }
+    const handleModalClose = () =>{
+        setModalVisible(false);
     }
     return (
         <div className='app-container' onClick={handleContainerClick}>
             <div className='header-container'>
                 <Header onHeaderButtonClick={handleHeaderClick}/>
             </div>
+            <Modal isVisible={modalVisible} content="hahahahaha" onClose={handleModalClose}/>
             <div className='word-container'>
                 {wordInputs.map((input, index) => (                
                     <WordInput
