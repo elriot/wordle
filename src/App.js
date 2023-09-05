@@ -1,47 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
 import './App.css';
 import { WordInput } from './components/WordInput';
-import {WRONG, CORRECT, POSITION_WRONG, WORD_INPUT_SIZE} from './utils/constants.js'
 import Header from './components/Header.js';
 import Modal from './components/Modal';
+import { isAlphabet, checkAnswer } from './utils/util';
 
-const checkAnswer = (answer, userInput) => {
-    const result = Array.from({ length: answer.length }, () => -1);
-    const ansCharMap = {};
-    for (const char of answer) {
-        if (ansCharMap[char] === undefined) {
-            ansCharMap[char] = 1;
-        } else {
-            ansCharMap[char] = ansCharMap[char] + 1;
-        }
-    }
-    // // 첫번째. 먼저 완전히 일치하는 요소들을 골라낸다
-    for(let i = 0; i < answer.length; i++){
-        if(answer[i] === userInput[i]){
-            result[i] = CORRECT;
-            ansCharMap[answer[i]]--;
-        }
-    }
-
-    // // 두번째. POSITION_WRONG과 WRONG을 골라낸다
-    for (let i = 0; i < userInput.length; i++) {
-        if(result[i] !== -1) continue;
-        // console.log(i, answer[i], userInput[i]);
-        const currAnsChar = userInput[i];
-        if (ansCharMap[currAnsChar] > 0) {
-            result[i] = POSITION_WRONG;
-            ansCharMap[currAnsChar]--;
-        } else {
-            result[i] = WRONG;
-        }        
-    }
-
-    return result;
-}
-
-const isAlphabet = (value) => {
-    return /^[a-zA-Z]+$/.test(value);
-}
 function App() {
     const answer = "fubao".toUpperCase();
     const charLength = 5;
@@ -50,6 +13,7 @@ function App() {
     const [results, setResults]= useState([]);
     const [currentInput, setCurrentInput] = useState("");
     const [modalVisible, setModalVisible] = useState(false);
+    const [warningVisible, setWarningVisible] = useState(false);
     const focusRef = useRef();
     
     const submitAnswer = () => {
@@ -67,6 +31,7 @@ function App() {
         setWordInputs(prev=>prev.concat(WordInput));
     }
     const handleKeyPress = (event) => {
+        setWarningVisible(false);
         if (event.key === "Enter") {
             submitAnswer();
             console.log(window)
@@ -82,8 +47,10 @@ function App() {
             }
             if(currentInput.length >= answer.length)
                 return;
-            if(!isAlphabet(event.key)) 
+            if(!isAlphabet(event.key)){
+                setWarningVisible(true);
                 return;
+            }
             const input = currentInput + (event.key).toUpperCase();
             setCurrentInput(input);
         }
@@ -101,13 +68,11 @@ function App() {
     
     const handleContainerClick = () => {
         focusRef.current.focus();
-
     }
     const handleInputChange = () => {
         return; // prevent error , there's keyboardEvent for input action    
     }
     const handleHeaderClick = (func) => {
-        // console.log("func" , func);
         if(func === "reset"){
             setWordInputs([WordInput]);
             setUserInputs([]);
@@ -144,6 +109,11 @@ function App() {
                 <input type='text'  ref={focusRef} value={currentInput} onChange={handleInputChange}/>
                 <button onClick={handleEnterClick}>Enter</button>
             </div>
+            {warningVisible &&
+                <p className='warning'>
+                    Only English characters are allowed. 
+                </p>
+            }
 
         </div>               
     );
