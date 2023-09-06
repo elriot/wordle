@@ -1,4 +1,4 @@
-# Wordle
+![image](https://github.com/elriot/wordle/assets/45351992/37cfbf53-c1fd-4456-b013-ffa94b76cca4)# Wordle
 
 Wordle is a game where you guess the word of the day, which is comprised of 5 letters. It works seamlessly on both PC browsers and mobile devices.
 
@@ -26,6 +26,6 @@ Wordle is a game where you guess the word of the day, which is comprised of 5 le
 
 
 ```markdown
-![Gameplay Screen](urls..)
+![Gameplay Screen]([urls..](https://github.com/elriot/wordle/blob/main/wordle_01.png?raw=true)https://github.com/elriot/wordle/blob/main/wordle_01.png?raw=true)
 ```
 
