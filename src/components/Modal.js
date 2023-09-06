@@ -1,7 +1,7 @@
 import "./Modal.css";
-import {AiOutlineClose} from "react-icons/ai";
+import { AiOutlineClose } from "react-icons/ai";
 
-function Modal({ isVisible, content, onClose }) {
+function Modal({ isVisible, onClose, children }) {
   if (!isVisible) {
     return null;
   }
@@ -9,8 +9,9 @@ function Modal({ isVisible, content, onClose }) {
   return (
     <div className="modal-overlay">
       <div className="modal-content">
-        {content}
-        <button onClick={onClose}><AiOutlineClose/></button>
+        <button className="close-button" onClick={onClose}><AiOutlineClose /></button>
+        {children}
+
       </div>
     </div>
   );

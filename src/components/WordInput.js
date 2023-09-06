@@ -11,12 +11,10 @@ const getBgColor = (code) => {
     }
 
 }
-export function WordInput({ active, answer, userInput, res, ...props }) {
+export function WordInput({ active, answer, userInput, res, blink, ...props }) {
     const size = WORD_INPUT_SIZE;
-    const bgColor = active === true ? "blue" : "grey";
-    const styles = { width: `${size}px`, height: `${size}px`, backgroundColor: "white" };    
-    const classes = active ? "box active" : "box";
-
+    const styles = { width: `${size}px`, height: `${size}px`, backgroundColor: "white" };
+    console.log(userInput, answer)
     return (
         <div className={`user-word-container ${active === true ? "active" : ""}`}>
             {Array.from({ length: answer.length }).map((_, index) => (
@@ -25,9 +23,8 @@ export function WordInput({ active, answer, userInput, res, ...props }) {
                         ...styles,
                         backgroundColor: res ? getBgColor(res[index]) : 'white'
                     }}
-                    // style={{...styles, backgroundColor: getBgColor(res[index])}}
                     key={index}
-                    className={classes}
+                    className={`box ${active === true ? "active" : ""}  ${blink ? "blink" : ""}`}
                 >
                     <span>{userInput[index]}</span>
                 </div>

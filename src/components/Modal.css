@@ -13,19 +13,22 @@
 }
 
 .modal-content {
-  width: 80%;
+  width: 80%;  
   background: white;
   padding: 20px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
 }
 
-.modal-content button {
+.close-button {
   position: absolute;
+  color:black;
+  /* position: absolute; */
   top: 10px;
   right: 10px;
   background: transparent;
   border: none;
   font-size: 1.5em;
   cursor: pointer;
+  /* background-color: gray; */
 }

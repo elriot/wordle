@@ -28,9 +28,37 @@
 }
 .input-container{
   margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;  
+  /* flex-direction: column; */
+}
+.input-container button{
+  background-color: blueviolet;
+  border-color:blueviolet;
+  color:white;
+  margin-left: 10px;
 }
 .warning{
-  color: red;
+  color: darkslategray;
   /* background-color: grey; */
   /* top:-5px; */
+}
+.cleared{
+  color:goldenrod;
+  font-weight: bold;
+  font-size: large;
+  text-align: center;
+  /* vertical-align: unset; */
+}
+.cleared svg{
+  top:20px;
+  /* background-color: red; */
+  /* margin-top: 0px; */
+  /* padding-top: 4px; */
+}
+.msg-container{
+  /* background-color: red; */
+  height: 200px;
+  margin-top: 30px;
 }

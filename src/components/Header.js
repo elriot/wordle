@@ -1,9 +1,6 @@
 import "./Header.css";
-import { RxReset } from "react-icons/rx";
-import { BsShare } from "react-icons/bs";
-import { LiaRandomSolid } from "react-icons/lia";
-import { FaInfoCircle } from "react-icons/fa";
 import {BiGame} from "react-icons/bi";
+import { shareIcon, randomIcon, resetIcon, infoIcon } from "../utils/util";
 
 function Header({ onHeaderButtonClick }) {
   return (
@@ -13,28 +10,25 @@ function Header({ onHeaderButtonClick }) {
         className="btn btn-light"
         onClick={() => onHeaderButtonClick("random")}
       >
-        <LiaRandomSolid />
+        {randomIcon()}
       </button>
-
       <button
         className="btn btn-light"
         onClick={() => onHeaderButtonClick("reset")}
       >
-        <RxReset />
+        {resetIcon()}
       </button>
-
-
       <button
         className="btn btn-light"
         onClick={() => onHeaderButtonClick("share")}
       >
-        <BsShare />
+        {shareIcon()}
       </button>
       <button
         className="btn btn-light"
         onClick={() => onHeaderButtonClick("info")}
       >
-        <FaInfoCircle />
+        {infoIcon()}
       </button>
     </div>
   );
