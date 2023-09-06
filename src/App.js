@@ -3,7 +3,7 @@ import './App.css';
 import { WordInput } from './components/WordInput';
 import Header from './components/Header.js';
 import Modal from './components/Modal';
-import { isAlphabet, checkAnswer, getInfoModalContent, getShareModalContent, getRandomWord, randomIcon } from './utils/util';
+import { isAlphabet, checkAnswer, getRandomWord, randomIcon } from './utils/util';
 import { ShareModalContent } from './components/ShareModalContent';
 import { InfoMoalContent } from './components/InfoMoalContent';
 import { WORDS } from './utils/constants';
@@ -20,7 +20,7 @@ function App() {
     const [modalContent, setModalContent] = useState("");
     const [clearMsgVisible, setClearMsgVisible] = useState(false);
     const [blink, setBlink] = useState(false);
-    const inputRef = useRef();
+    // const inputRef = useRef();
     const scrollRef = useRef();
     const focusRef = useRef();
 
@@ -166,7 +166,7 @@ function App() {
                         If you want to play more, Click Random {randomIcon()} button!
                     </p>
                 }
-                {warningVisible &&
+                {warningVisible && !clearMsgVisible &&
                     <p className='warning'>
                         Only English characters are allowed.
                     </p>

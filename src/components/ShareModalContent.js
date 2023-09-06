@@ -27,7 +27,7 @@ export const ShareModalContent = () => {
     return (
     <div className="share-modal-container">
         <div className="share-inner-container">
-            <input className="url" type="text" ref={textInput} value="http://www.naver.com" readOnly />
+            <input className="url" type="text" ref={textInput} value="https://elriot.github.io/wordle" readOnly />
             <button className="copy-button btn btn-light" onClick={copyToClipboard}>
                 {copyClipboardIcon()}
             </button>

@@ -14,7 +14,7 @@ const getBgColor = (code) => {
 export function WordInput({ active, answer, userInput, res, blink, ...props }) {
     const size = WORD_INPUT_SIZE;
     const styles = { width: `${size}px`, height: `${size}px`, backgroundColor: "white" };
-    console.log(userInput, answer)
+    // console.log(userInput, answer)
     return (
         <div className={`user-word-container ${active === true ? "active" : ""}`}>
             {Array.from({ length: answer.length }).map((_, index) => (

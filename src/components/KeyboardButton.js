@@ -1,7 +1,7 @@
 import "./KeyboardButton.css";
 export default function Keyboard() {
     const handleKeyPress = (key) => {
-        console.log("hey", key);
+        // console.log("hey", key);
         const event = new KeyboardEvent("keydown", {
             bubbles: true,
             cancelable: true,
