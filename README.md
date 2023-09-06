@@ -25,4 +25,6 @@ Wordle is a game where you guess the word of the day, which is comprised of 5 le
 - Live Webpage : [https://elriot.github.io/wordle](https://elriot.github.io/wordle)
 
 
-![Gameplay Screen] (https://github.com/elriot/wordle/blob/main/wordle_01.png?raw=true)
+![Gameplay Screen](https://github.com/elriot/wordle/blob/main/wordle_01.png?raw=true)
+
+
