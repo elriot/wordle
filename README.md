@@ -20,11 +20,10 @@ Wordle is a game where you guess the word of the day, which is comprised of 5 le
 - Framework: React
 - Library: Bootstrap 5, React-Icon
 
-## [Add live web link here]
+### Links
+- [GitHub Repository](https://github.com/elriot/wordle)
+- [Live Webpage](https://elriot.github.io/wordle)
 
----
-
-You can add screenshots to a README file on platforms like GitHub by first uploading the screenshot to the internet (you can use a service like Imgur or upload it directly to your GitHub repository), and then linking to the image using the following syntax:
 
 ```markdown
 ![Gameplay Screen](urls..)
