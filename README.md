@@ -20,12 +20,12 @@ Wordle is a game where you guess the word of the day, which is comprised of 5 le
 - Framework: React
 - Library: Bootstrap 5, React-Icon
 
-### Links
-- [GitHub Repository](https://github.com/elriot/wordle)
-- [Live Webpage](https://elriot.github.io/wordle)
+## Links
+- GitHub Repository : [https://github.com/elriot/wordle](https://github.com/elriot/wordle)
+- Live Webpage : [https://elriot.github.io/wordle](https://elriot.github.io/wordle)
 
 
-### Game Screen
+## Game Screen
 ![Gameplay Screen](https://github.com/elriot/wordle/blob/main/wordle_play_01.png?raw=true)
 ![Gameplay Screen](https://github.com/elriot/wordle/blob/main/wordle_play_02.png?raw=true)
 ![Gameplay Screen](https://github.com/elriot/wordle/blob/main/wordle_play_03.png?raw=true)
