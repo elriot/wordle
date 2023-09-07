@@ -5,7 +5,7 @@ import Header from './components/Header.js';
 import Modal from './components/Modal';
 import { isAlphabet, checkAnswer, getRandomWord, randomIcon } from './utils/util';
 import { ShareModalContent } from './components/ShareModalContent';
-import { InfoMoalContent } from './components/InfoMoalContent';
+import { InfoModalContent } from './components/InfoModalContent';
 import { WORDS } from './utils/constants';
 
 function App() {
@@ -113,7 +113,7 @@ function App() {
             setModalVisible(true);
         } else if (func === "info") {
             // console.log("info");
-            setModalContent(<InfoMoalContent />);
+            setModalContent(<InfoModalContent />);
             setModalVisible(true);
         } else if (func === "random") {
             clearBoard();

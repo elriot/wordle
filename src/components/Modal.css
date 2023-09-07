@@ -9,15 +9,19 @@
   justify-content: center;
   align-items: flex-start;
   padding-top: 10vh;
-  z-index: 9999;
+  z-index: 9999;  
 }
 
 .modal-content {
-  width: 80%;  
+  width: auto;
+  max-width: 80vw;  
   background: white;
   padding: 20px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
+  max-height: 80vh;
+  overflow-y: auto;
+  height: auto;
 }
 
 .close-button {
